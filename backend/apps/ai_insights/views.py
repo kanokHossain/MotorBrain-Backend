@@ -35,8 +35,10 @@ class VehicleHealthScoreView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        qs = VehicleHealthScore.objects.filter(vehicle__owner=self.request.user)
+        qs = VehicleHealthScore.objects.filter(
+            vehicle__owner=self.request.user
+        ).order_by("-computed_at")
         vehicle_id = self.request.query_params.get("vehicle")
         if vehicle_id:
             qs = qs.filter(vehicle_id=vehicle_id)
-        return qs[:10]  # Last 10 scores
+        return qs
