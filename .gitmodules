@@ -1,0 +1,3 @@
+[submodule "mobile-app"]
+	path = mobile-app
+	url = git@github-personal:kanokHossain/MotorBrain-APP.git

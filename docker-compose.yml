@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: motorbrain_db
+      POSTGRES_USER: motorbrain
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  api:
+    build: .
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --no-input &&
+             gunicorn motorbrain.wsgi:application --bind 0.0.0.0:8000 --workers 3"
+    volumes:
+      - ./backend:/app/backend
+      - ./.env:/app/.env
+      - media_files:/app/backend/media
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://motorbrain:password@db:5432/motorbrain_db
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+
+  celery:
+    build: .
+    command: sh -c "cd /app/backend && celery -A motorbrain worker -l info"
+    volumes:
+      - ./backend:/app/backend
+      - ./.env:/app/.env
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://motorbrain:password@db:5432/motorbrain_db
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+
+  celery-beat:
+    build: .
+    command: sh -c "cd /app/backend && celery -A motorbrain beat -l info"
+    volumes:
+      - ./backend:/app/backend
+      - ./.env:/app/.env
+    depends_on:
+      - db
+      - redis
+    environment:
+      DATABASE_URL: postgres://motorbrain:password@db:5432/motorbrain_db
+      CELERY_BROKER_URL: redis://redis:6379/0
+
+volumes:
+  postgres_data:
+  media_files:

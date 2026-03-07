@@ -1,0 +1,16 @@
+[
+  {"model": "maintenance.maintenancecategory", "pk": 1, "fields": {"name": "Engine Oil", "icon": "oil", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 2, "fields": {"name": "Gearbox / Transmission Oil", "icon": "gearbox", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 3, "fields": {"name": "Brake Pads / Brake Shoes", "icon": "brakes", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 4, "fields": {"name": "Tyres", "icon": "tyre", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 5, "fields": {"name": "Battery", "icon": "battery", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 6, "fields": {"name": "Air Filter", "icon": "filter", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 7, "fields": {"name": "Fuel Filter", "icon": "fuel-filter", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 8, "fields": {"name": "Spark Plugs", "icon": "spark", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 9, "fields": {"name": "Coolant", "icon": "coolant", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 10, "fields": {"name": "Brake Fluid", "icon": "brake-fluid", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 11, "fields": {"name": "Chain Lubrication", "icon": "chain", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 12, "fields": {"name": "Drive Belt", "icon": "belt", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 13, "fields": {"name": "Windshield Wipers", "icon": "wiper", "is_system": true}},
+  {"model": "maintenance.maintenancecategory", "pk": 14, "fields": {"name": "Other", "icon": "wrench", "is_system": true}}
+]
