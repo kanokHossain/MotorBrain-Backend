@@ -26,6 +26,7 @@ class Vehicle(models.Model):
         HYBRID = "hybrid", "Hybrid"
         CNG = "cng", "CNG"
         LPG = "lpg", "LPG"
+        OCTANE = "octane", "Octane"
 
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
